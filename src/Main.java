@@ -29,6 +29,33 @@ public class Main {
 	allEmails.add(email10);
 	//now do stuff with it
 	
+	
+	}
+	private static double getSpamPercentWithFree(ArrayList<Email> allEmails)
+	{
+		double percentWithSpamAndFree = 0;
+		for(Email email : allEmails)
+		{
+			if(email.isSpam() && email.getWordsContained().equals("free"))
+			{
+				percentWithSpamAndFree++;
+			}
+		}
+		percentWithSpamAndFree = percentWithSpamAndFree / allEmails.size();
+		return percentWithSpamAndFree;
+	}
+	private static double getPercentSpam(ArrayList<Email> allEmails)
+	{
+		double percentWithSpam = 0;
+		for(Email email : allEmails)
+		{
+			if(email.isSpam())
+			{
+				percentWithSpam++;
+			}
+		}
+		percentWithSpam = percentWithSpam / allEmails.size();
+		return percentWithSpam;
 	}
 
 }
