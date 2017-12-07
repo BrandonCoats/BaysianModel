@@ -38,7 +38,7 @@ public class Main {
 		double percentWithFree = 0;
 		for(Email email : allEmails)
 		{
-			if(email.getWordsContained().equals(spamWord))
+			if(email.getWordsContained().contains(spamWord))
 			{
 				percentWithFree++;
 			}
@@ -51,7 +51,7 @@ public class Main {
 		double percentWithSpamAndFree = 0;
 		for(Email email : allEmails)
 		{
-			if(email.isSpam() && email.getWordsContained().equals(spamWord))
+			if(email.isSpam() && email.getWordsContained().contains(spamWord))
 			{
 				percentWithSpamAndFree++;
 			}
