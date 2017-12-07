@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class Main {
+	
 
 	public static void main(String[] args) {
 	Email email1 = new Email(true, "free");
@@ -29,14 +30,28 @@ public class Main {
 	allEmails.add(email10);
 	//now do stuff with it
 	
+	double prob = getSpamProbability(allEmails, "free");
+	System.out.println("Probability of being spam if email contains " + "free" + " " + prob);
 	
 	}
-	private static double getSpamPercentWithFree(ArrayList<Email> allEmails)
+	private static double getPercentWithWord(ArrayList<Email> allEmails, String spamWord) {
+		double percentWithFree = 0;
+		for(Email email : allEmails)
+		{
+			if(email.getWordsContained().equals(spamWord))
+			{
+				percentWithFree++;
+			}
+		}
+		percentWithFree = percentWithFree / allEmails.size();
+		return percentWithFree;
+	}
+	private static double getSpamPercentWithFree(ArrayList<Email> allEmails, String spamWord)
 	{
 		double percentWithSpamAndFree = 0;
 		for(Email email : allEmails)
 		{
-			if(email.isSpam() && email.getWordsContained().equals("free"))
+			if(email.isSpam() && email.getWordsContained().equals(spamWord))
 			{
 				percentWithSpamAndFree++;
 			}
@@ -57,5 +72,22 @@ public class Main {
 		percentWithSpam = percentWithSpam / allEmails.size();
 		return percentWithSpam;
 	}
-
+	private static double getSpamProbability(ArrayList<Email> allEmails, String spamWord) {
+		double percent = 0;
+		double percentSpam = getPercentSpam(allEmails);
+		double perFree = getPercentWithWord(allEmails, spamWord);
+		System.out.println("Percent Spam: " + percentSpam);
+		double perSpamFree = getSpamPercentWithFree(allEmails, spamWord);
+		System.out.println("Percent spam and contains \"" + spamWord + "\": " + perSpamFree);
+		// P(A|B) = (27/30) * (30/100) / (40/100)
+		percent = (perSpamFree / percentSpam) * (percentSpam / 1.00) / (perFree / 1.0);
+		
+		return percent;
+	}
 }
+
+
+
+
+
+
