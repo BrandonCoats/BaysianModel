@@ -29,9 +29,9 @@ public class Main {
 	allEmails.add(email9);
 	allEmails.add(email10);
 	//now do stuff with it
-	
-	double prob = getSpamProbability(allEmails, "free");
-	System.out.println("Probability of being spam if email contains " + "free" + " " + prob);
+	String checkWord = "free";
+	double prob = getSpamProbability(allEmails, checkWord);
+	System.out.println("Probability of being spam if email contains " + checkWord + " " + prob);
 	
 	}
 	private static double getPercentWithWord(ArrayList<Email> allEmails, String spamWord) {
